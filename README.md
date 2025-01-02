@@ -32,6 +32,34 @@ This project is a vibrant personal portfolio work focusing on redesigning the po
 ### 🔧 Install dependencies:
 - `npm install`
 
+### 🕵🏽‍♂️ Environment variables
+- Discord
+    - Go to [Discord Applications](https://discord.com/developers/applications) and press `New Application`, navigate to Oauth2 and copy the `CLIENT ID` and `CLIENT SECRET`. Note that copying the Client Secret may require Discord authentication.
+    - In the Discord bot page, create another redirect link and provide this link http://localhost:3000/api/auth/callback/discord
+***
+- Next Auth
+    - Go to your terminal and run `openssl rand -base64 32`. The provided output will be your `NEXTAUTH_SECRET`
+    - Your `NEXTAUTH_URL` will be the base URL of your provided site link. Most commonly: http://localhost:3000/
+***
+- Database
+    - To get your Database URL, go to MongoDB and create a cluster and generate the cluster link.
+    - Refer to [MongoDB connection string documentation](https://www.mongodb.com/docs/manual/reference/connection-string/) for a complete list of connection string arguments. There are no Prisma ORM-specific arguemnts.
+
+`.env` - Example
+```
+DISCORD_CLIENT_SECRET=xxx
+DISCORD_CLIENT_ID=xxx
+NEXTAUTH_URL=http://localhost:3000/
+NEXTAUTH_SECRET=xxx
+DATABASE_URL="xxx"
+```
+
+***
+
+### 🗄️ Setup database
+- `npx prisma init`
+- `npx prisma generate`
+
 ### 🚀 Run the project:
 - `npm run build`
 - `npm run start`
