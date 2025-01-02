@@ -1,0 +1,28 @@
+// schema.prisma
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
+}
+
+model Posts {
+    id        String   @id @default(auto()) @map("_id") @db.ObjectId
+    timestamp DateTime @default(now())
+    content   String
+    author    String
+    likes     Int      @default(0)
+    avatar    String
+    username  String
+    likedBy   Likes[]
+}
+
+model Likes {
+    id     String @id @default(auto()) @map("_id") @db.ObjectId
+    postId String @db.ObjectId
+    post   Posts  @relation(fields: [postId], references: [id])
+    userId String
+}
